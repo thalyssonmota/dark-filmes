@@ -16,6 +16,18 @@ export default function Cadastrar() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!titulo || !diretor || !ano || !genero || !nota || !sinopse || !banner) {
+      toast.error("Preencha todos os campos!");
+      return;
+    }
+    if (ano < 1900 || ano > new Date().getFullYear()) {
+      toast.error("Ano inválido!");
+      return;
+    }
+    if (nota < 0 || nota > 10) {
+      toast.error("Nota deve ser entre 0 e 10!");
+      return;
+    }
     try {
       await instance.post("/api/movies", {
         titulo: titulo,
