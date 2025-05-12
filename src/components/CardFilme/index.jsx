@@ -1,6 +1,16 @@
+import { useRouter } from "next/router";
+
 export default function CardFilme({ filme }) {
+  
+  const router = useRouter();
+  
+  function handleChangePage(){
+    router.push(`/filme/${filme.id}`)
+  }
   return (
-    <div className="w-[330px] h-[280px] flex flex-col rounded-lg bg-[#222222] border border-transparent hover:border-[#8f7bd8] transition-all duration-300 ease-in-out">
+    <div 
+    onClick={handleChangePage}
+    className="w-[330px] h-[280px] flex flex-col rounded-lg bg-[#222222] border border-transparent hover:border-[#8f7bd8] transition-all duration-300 ease-in-out">
       <div className="w-full h-[70%] rounded-t-lg relative">
         <img
           src={filme.banner}
