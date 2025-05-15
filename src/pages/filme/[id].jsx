@@ -11,10 +11,10 @@ import { useEffect, useState } from "react";
 export default function Filme() {
   const router = useRouter();
   const { id } = router.query;
-  const [filmes, setFilmes] = useState({});
+  const [filme, setFilmes] = useState({});
 
   useEffect(() => {
-    async function Filmes() {
+    async function getFilmesById() {
       const response = await instance.get(`/api/movies/${id}`);
       setFilmes(response.data)
     }
@@ -37,8 +37,8 @@ export default function Filme() {
             <div className="w-full h-[90%]">
               <img
                 className="w-full h-full rounded-lg object-cover"
-                src="https://sm.ign.com/t/ign_br/screenshot/default/ka-tlou-charactersjoel-1080x1350-hbomax-bra-organic-prelaunc_432d.600.jpg"
-                alt=""
+                src={filme.banner}
+                alt={filme.titulo}
               />
             </div>
             <div className="w-full flex h-[10%] pt-4 justify-between items-center">
@@ -53,24 +53,24 @@ export default function Filme() {
           </div>
           <div className="w-[60%] h-full flex flex-col px-4 ">
             <div className="w-full flex gap-2 items-baseline">
-              <h1 className="text-[35px] text-[#9b87f5] font-bold">The Last Of US</h1>
-              <p className="text-[#8a898c] font-semibold text-[18px]">(2024)</p>
+              <h1 className="text-[35px] text-[#9b87f5] font-bold">{filme.titulo}</h1>
+              <p className="text-[#8a898c] font-semibold text-[18px]">{filme.ano}</p>
             </div>
             <div className="w-full flex gap-4">
               <div className="py-1 px-4 rounded-2xl bg-[#4ade80]/20 text-[#4ade80]">
-                <p className="text-[17px]">10/10</p>
+                <p className="text-[17px]">{filme.nota}/10</p>
               </div>
               <div className="py-1 px-4 rounded-2xl bg-[#9b87f5]/20 text-[#9b87f5]">
-                <p className="text-[17px]">Ação</p>
+                <p className="text-[17px]">{filme.genero}</p>
               </div>
             </div>
             <div className="w-full flex flex-col mt-8">
               <h4 className="font-bold text-[20px]">Diretor</h4>
-              <p className="text[#8a898c]">Neil Druckmann</p>
+              <p className="text[#8a898c]">{filme.diretor}</p>
             </div>
             <div className="w-full flex flex-col mt-8">
               <h4 className="font-bold text-[20px]">Sinopse</h4>
-              <p className="text[#8a898c]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odio, vel facere amet incidunt quod deserunt in, ipsum similique minima nihil maiores veniam sed laborum explicabo tenetur dolore temporibus rem?</p>
+              <p className="text[#8a898c]">{filme.sinopse}</p>
             </div>
 
           </div>
